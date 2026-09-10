@@ -1,0 +1,59 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kac-zwanzig"
+dynamic = ["version"]
+description = "An exactly solvable Kac-Zwanzig bath: spectral densities, memory kernels, correlation functions and sampled trajectories for testing memory-kernel extraction"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{name = "William C. Pfalzgraff"}]
+keywords = [
+    "generalized Langevin equation", "memory kernel", "Kac-Zwanzig", "harmonic bath",
+    "velocity autocorrelation", "Volterra integral equation", "statistical mechanics",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Chemistry",
+    "Topic :: Scientific/Engineering :: Physics",
+]
+dependencies = ["numpy>=1.24"]
+
+[project.optional-dependencies]
+examples = ["matplotlib>=3.7"]
+test = ["pytest>=7"]
+dev = ["pytest>=7", "matplotlib>=3.7", "ruff>=0.5", "build", "twine", "nbformat", "nbclient", "ipykernel"]
+
+[project.urls]
+Homepage = "https://github.com/william-pfalzgraff/kac-zwanzig"
+Repository = "https://github.com/william-pfalzgraff/kac-zwanzig"
+Issues = "https://github.com/william-pfalzgraff/kac-zwanzig/issues"
+Changelog = "https://github.com/william-pfalzgraff/kac-zwanzig/blob/main/CHANGELOG.md"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.dynamic]
+version = {attr = "kac_zwanzig.__version__"}
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+extend-exclude = ["examples/output"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+ignore = ["E731", "B905", "UP007", "UP045"]
