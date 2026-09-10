@@ -8,15 +8,15 @@ An exactly solvable Kac–Zwanzig bath: memory kernels, correlation functions an
 trajectories in closed form, plus sampled correlation functions with the statistical
 noise of a real simulation. 
 
-The Kac–Zwanzig model is a single particle attached by springs to a large collection of
-harmonic oscillators, the "bath". It is the simplest mechanical picture of a solute
-jostled by a liquid: the oscillators take energy from the particle and hand it back
-later, and that delayed response is the memory effect that shapes the particle's
-velocity autocorrelation function (VACF) in molecular dynamics (MD) simulations of
-liquids. Because every force in the model is linear, it can be solved exactly. The
-particle's correlation functions, the memory kernel of its generalized Langevin equation
-(GLE), and even individual trajectories are all available in closed form, up to one
-matrix diagonalization. 
+The Kac–Zwanzig model is a single particle attached by springs to a collection of
+harmonic oscillators, the "bath". It is a simple model of a solute jostled by a 
+liquid: the oscillators take energy from the particle and hand it back later, and 
+that delayed response is the memory effect that shapes the particle's velocity 
+autocorrelation function (VACF) in molecular dynamics (MD) simulations of liquids. 
+Because every force in the model is linear, it can be solved exactly. The particle's 
+correlation functions, the memory kernel of its generalized Langevin equation (GLE), 
+and even individual trajectories are all available in closed form, up to one matrix 
+diagonalization. 
 
 `kac_zwanzig` generates, for a bath you choose:
 
@@ -30,11 +30,7 @@ matrix diagonalization.
 
 It depends only on numpy and contains no solver.
 
-## The model in equations
-
-Everything the package computes follows from these. Units are yours; the presets read
-naturally with `M = k_BT = ω_c = 1`. Bath oscillators have unit mass (a rescaling of
-their coordinates, nothing is lost).
+## Theory
 
 **The Hamiltonian.** A particle of mass `M`, coordinate `q`, momentum `p`, optionally in a
 harmonic trap of frequency `Ω` (zero by default), coupled to `N` oscillators with
@@ -51,7 +47,7 @@ $$
 K_N(t)=\sum_{j=1}^{N}k_j\cos\omega_j t, \tag{2}
 $$
 
-exact for the finite bath. A continuous bath is described by a spectral density
+which is exact for the finite bath. A continuous bath is described by a spectral density
 `J(ω)`; the two are related by
 
 $$
@@ -60,8 +56,6 @@ K_\infty(t)=\frac{2}{\pi}\int_0^\infty\frac{J(\omega)}{\omega}\cos\omega t\,d\om
 $$
 
 so choosing `(ω_j, k_j)` is choosing a quadrature rule for the cosine transform in (3).
-`K(0) = Σ_j k_j` is the total stiffness of the springs; `∫₀^∞ K dt` is the friction
-coefficient.
 
 **The generalized Langevin equation.** Integrating out the oscillators exactly gives, for
 the particle's velocity `v = p/M`,
@@ -81,12 +75,9 @@ $$
 \dot C(t)=-\int_0^t\Gamma(t-s)\,C(s)\,ds,\qquad \Gamma(t)=\frac{K_N(t)+M\Omega^2}{M}. \tag{5}
 $$
 
-`Γ` is the memory kernel (the bath kernel per unit mass, plus the trap). Given `C` and
-`dC/dt`, (5) is a Volterra integral equation of the first kind for `Γ`; solving it is what
-"extracting the memory kernel from simulation data" means. Because (5) is linear in `C`,
-neither the normalization of `C` nor the temperature affects `Γ`. Equation (5) holds
-identically for every finite bath (the tests check it to 1e-13), so `Γ` is the exact
-reference no matter how the bath was discretized.
+`Γ` is the memory kernel (the bath kernel per unit mass, plus the trap). Equation (5) 
+holds identically for every finite bath, so `Γ` is the exact reference no matter how 
+the bath was discretized.
 
 **Normal modes.** The coupled system is a set of `N+1` independent oscillators. Their
 frequencies `ν_k` are the square roots of the eigenvalues of an `(N+1)×(N+1)` arrowhead
@@ -141,7 +132,7 @@ $$
 
 For a free particle in the Ohmic bath the shape of `C(t)` depends on one number only,
 `η/(Mω_c)`; `ω_c` sets the unit of time. With `M = ω_c = 1`, `η = 1` gives the single shallow
-negative dip typical of liquids, `η = 5` a clearly caged oscillation.
+negative dip typical of liquids.
 
 The derivations are in [docs/theory.md](docs/theory.md); the choice of frequency grid is
 analysed in [docs/frequency_grids.pdf](docs/frequency_grids.pdf).
@@ -229,14 +220,6 @@ boot = est.bootstrap(n_boot=1000, seed=2)
 lo, hi = boot.band("C", level=0.95)                     # pointwise 95% band
 sig  = np.sqrt(kz.predicted_variance(C, 100_000))       # what eq. (9) predicts, for comparison
 ```
-
-**Feeding a solver.** `inversion_data` bundles `C`, `dC/dt` (exact, estimated from
-`⟨v̇ v⟩`, or finite-differenced) and the exact `Γ` on a uniform grid; whatever solves (5)
-can be scored with `data.residual`. Bootstrap replicates pushed through the same solver
-give statistical error bars on the recovered kernel. `examples/naive_inversion.py` does
-this with a twenty-line trapezoid-rule solver, which is enough to see the central
-phenomenon: a first-kind inversion amplifies the noise in `C`, and by how much depends on
-the time step, the solver and the derivative estimator.
 
 ## API
 
