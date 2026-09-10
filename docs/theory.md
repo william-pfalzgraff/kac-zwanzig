@@ -27,13 +27,13 @@ Each oscillator obeys $\ddot x_j=-\omega_j^2(x_j-g_jq)$, a driven harmonic oscil
 solution is
 
 $$
-x_j(t)=x_j(0)\cos\omega_jt+\frac{p_j(0)}{\omega_j}\sin\omega_jt+\omega_jg_j\int_0^t\sin\omega_j(t-s) q(s) ds .
+x_j(t)=x_j(0)\cos\omega_jt+\frac{p_j(0)}{\omega_j}\sin\omega_jt+\omega_jg_j\int_0^t\sin\omega_j(t-s) q(s)\ ds .
 $$
 
 Integrating the last term by parts,
 
 $$
-\omega_jg_j\int_0^t\sin\omega_j(t-s) q(s) ds=g_j\Big[q(t)-q(0)\cos\omega_jt-\int_0^t\cos\omega_j(t-s) \dot q(s) ds\Big].
+\omega_jg_j\int_0^t\sin\omega_j(t-s) q(s)\ ds=g_j\Big[q(t)-q(0)\cos\omega_jt-\int_0^t\cos\omega_j(t-s) \dot q(s)\ ds\Big].
 $$
 
 The particle obeys $M\ddot q=-M\Omega^2q+\sum_j\omega_j^2g_j(x_j-g_jq)$. Substituting $x_j(t)$,
@@ -41,7 +41,7 @@ the $g_j^2\omega_j^2q(t)$ terms cancel exactly against the counter-term in the H
 (this is why the coupling is written as a difference), and what remains is
 
 $$
-M\ddot q(t)=-M\Omega^2q(t)-\int_0^tK_N(t-s) \dot q(s) ds+F(t),
+M\ddot q(t)=-M\Omega^2q(t)-\int_0^tK_N(t-s) \dot q(s)\ ds+F(t),
 $$
 
 $$
@@ -70,11 +70,11 @@ the two coincide.)
 ## 3. The equation for the correlation function
 
 Multiply the GLE by $v(0)=p(0)/M$ and average. $\langle F(t)v(0)\rangle=0$ removes the
-random force; $\langle q(t)v(0)\rangle=\int_0^t\langle v(s)v(0)\rangle ds$ handles the trap.
+random force; $\langle q(t)v(0)\rangle=\int_0^t\langle v(s)v(0)\rangle\ ds$ handles the trap.
 With $C(t)=\langle v(t)v(0)\rangle/\langle v^2\rangle$,
 
 $$
-\dot C(t)=-\int_0^t\Gamma(t-s) C(s) ds,\qquad \Gamma(t)=\frac{K_N(t)+M\Omega^2}{M}.
+\dot C(t)=-\int_0^t\Gamma(t-s) C(s)\ ds,\qquad \Gamma(t)=\frac{K_N(t)+M\Omega^2}{M}.
 $$
 
 The trap contributes a *constant* to the memory kernel, because a harmonic potential is
@@ -127,7 +127,7 @@ C(t)=\sum_ka_k^2\cos\nu_kt,\qquad \dot C(t)=-\sum_ka_k^2\nu_k\sin\nu_kt,\qquad \
 $$
 
 **Consistency check in closed form.** With
-$\int_0^t\cos\omega(t-s)\cos\nu s ds=(\omega\sin\omega t-\nu\sin\nu t)/(\omega^2-\nu^2)$,
+$\int_0^t\cos\omega(t-s)\cos\nu s\ ds=(\omega\sin\omega t-\nu\sin\nu t)/(\omega^2-\nu^2)$,
 the convolution $\int_0^t\Gamma(t-s)C(s)ds$ is a double sum over bath and normal modes whose
 coefficients vanish term by term by the secular equation and by the resolvent identity
 $\sum_ka_k^2/(\omega_j^2-\nu_k^2)=0$. The test suite evaluates it numerically and finds
@@ -210,7 +210,7 @@ ensemble average over independent initial conditions is the estimator that conve
 
 ## 8. Choosing the frequencies: a summary
 
-Both grids are quadrature rules for $K_\infty(t)=\int_0^\infty f(\omega)\cos\omega t d\omega$,
+Both grids are quadrature rules for $K_\infty(t)=\int_0^\infty f(\omega)\cos\omega t\ d\omega$,
 $f=\frac2\pi J/\omega$. The midpoint-uniform grid, $\omega_j=(j-\tfrac12)\Delta\omega$,
 $k_j=f(\omega_j)\Delta\omega$, has by Poisson summation the error
 $K_N-K_\infty=\sum_{m\neq0}(-1)^mK_\infty(t-2\pi m/\Delta\omega)$: a sum of smooth,

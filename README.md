@@ -52,7 +52,7 @@ which is exact for the finite bath. A continuous bath is described by a spectral
 
 $$
 J(\omega)=\frac{\pi}{2}\sum_j k_j \omega_j \delta(\omega-\omega_j),\qquad
-K_\infty(t)=\frac{2}{\pi}\int_0^\infty\frac{J(\omega)}{\omega}\cos\omega t d\omega, \tag{3}
+K_\infty(t)=\frac{2}{\pi}\int_0^\infty\frac{J(\omega)}{\omega}\cos\omega t\ d\omega, \tag{3}
 $$
 
 so choosing `(ω_j, k_j)` is choosing a quadrature rule for the cosine transform in (3).
@@ -61,7 +61,7 @@ so choosing `(ω_j, k_j)` is choosing a quadrature rule for the cosine transform
 the particle's velocity `v = p/M`,
 
 $$
-M \dot v(t)=-M\Omega^2 q(t)-\int_0^t K_N(t-s) v(s) ds+F(t), \tag{4}
+M \dot v(t)=-M\Omega^2 q(t)-\int_0^t K_N(t-s) v(s)\ ds+F(t), \tag{4}
 $$
 
 where `F(t)` is the *random force*, a function of the oscillators' initial conditions
@@ -72,7 +72,7 @@ only. When those initial conditions are drawn from the canonical (thermal) ensem
 turns it into an equation for the normalized VACF `C(t) = ⟨v(t)v(0)⟩/⟨v²⟩`:
 
 $$
-\dot C(t)=-\int_0^t\Gamma(t-s) C(s) ds,\qquad \Gamma(t)=\frac{K_N(t)+M\Omega^2}{M}. \tag{5}
+\dot C(t)=-\int_0^t\Gamma(t-s) C(s)\ ds,\qquad \Gamma(t)=\frac{K_N(t)+M\Omega^2}{M}. \tag{5}
 $$
 
 `Γ` is the memory kernel (the bath kernel per unit mass, plus the trap). Equation (5) 
