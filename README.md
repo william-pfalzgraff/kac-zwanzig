@@ -6,10 +6,7 @@
 
 An exactly solvable Kac–Zwanzig bath: memory kernels, correlation functions and
 trajectories in closed form, plus sampled correlation functions with the statistical
-noise of a real simulation. A test bed for any method that extracts memory kernels from
-simulation data.
-
-## What it is, and why you would want it
+noise of a real simulation. 
 
 The Kac–Zwanzig model is a single particle attached by springs to a large collection of
 harmonic oscillators, the "bath". It is the simplest mechanical picture of a solute
@@ -19,9 +16,7 @@ velocity autocorrelation function (VACF) in molecular dynamics (MD) simulations 
 liquids. Because every force in the model is linear, it can be solved exactly. The
 particle's correlation functions, the memory kernel of its generalized Langevin equation
 (GLE), and even individual trajectories are all available in closed form, up to one
-matrix diagonalization. That makes it an ideal test bed for any method that extracts a
-memory kernel from simulation data: the right answer is known, and the statistical noise
-of a finite simulation can be reproduced at will.
+matrix diagonalization. 
 
 `kac_zwanzig` generates, for a bath you choose:
 
@@ -33,7 +28,7 @@ of a finite simulation can be reproduced at will.
   standard errors and a bootstrap,
 - a bundle of `C`, `dC/dt` and the exact kernel to feed to any kernel-extraction method.
 
-It depends only on numpy and contains no solver; it produces the problems, you bring the method.
+It depends only on numpy and contains no solver.
 
 ## The model in equations
 
@@ -48,10 +43,6 @@ coordinates `x_j`, frequencies `ω_j` and coupling weights `k_j ≥ 0`:
 $$
 H=\frac{p^2}{2M}+\frac{1}{2}M\Omega^2q^2+\sum_{j=1}^{N}\left[\frac{p_j^2}{2}+\frac{\omega_j^2}{2}\Big(x_j-\frac{\sqrt{k_j}}{\omega_j}\,q\Big)^2\right]. \tag{1}
 $$
-
-The oscillators are tied to the particle's position, so displacing the particle stretches
-every spring; the form of the coupling guarantees that no net force acts on a resting
-particle (the usual "counter-term").
 
 **The bath kernel and the spectral density.** The bath acts on the particle through one
 function only,
