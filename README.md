@@ -37,7 +37,7 @@ harmonic trap of frequency `Ω` (zero by default), coupled to `N` oscillators wi
 coordinates `x_j`, frequencies `ω_j` and coupling weights `k_j ≥ 0`:
 
 $$
-H=\frac{p^2}{2M}+\frac{1}{2}M\Omega^2q^2+\sum_{j=1}^{N}\left[\frac{p_j^2}{2}+\frac{\omega_j^2}{2}\Big(x_j-\frac{\sqrt{k_j}}{\omega_j}\,q\Big)^2\right]. \tag{1}
+H=\frac{p^2}{2M}+\frac{1}{2}M\Omega^2q^2+\sum_{j=1}^{N}\left[\frac{p_j^2}{2}+\frac{\omega_j^2}{2}\Big(x_j-\frac{\sqrt{k_j}}{\omega_j} q\Big)^2\right]. \tag{1}
 $$
 
 **The bath kernel and the spectral density.** The bath acts on the particle through one
@@ -51,8 +51,8 @@ which is exact for the finite bath. A continuous bath is described by a spectral
 `J(ω)`; the two are related by
 
 $$
-J(\omega)=\frac{\pi}{2}\sum_j k_j\,\omega_j\,\delta(\omega-\omega_j),\qquad
-K_\infty(t)=\frac{2}{\pi}\int_0^\infty\frac{J(\omega)}{\omega}\cos\omega t\,d\omega, \tag{3}
+J(\omega)=\frac{\pi}{2}\sum_j k_j \omega_j \delta(\omega-\omega_j),\qquad
+K_\infty(t)=\frac{2}{\pi}\int_0^\infty\frac{J(\omega)}{\omega}\cos\omega t d\omega, \tag{3}
 $$
 
 so choosing `(ω_j, k_j)` is choosing a quadrature rule for the cosine transform in (3).
@@ -61,7 +61,7 @@ so choosing `(ω_j, k_j)` is choosing a quadrature rule for the cosine transform
 the particle's velocity `v = p/M`,
 
 $$
-M\,\dot v(t)=-M\Omega^2 q(t)-\int_0^t K_N(t-s)\,v(s)\,ds+F(t), \tag{4}
+M \dot v(t)=-M\Omega^2 q(t)-\int_0^t K_N(t-s) v(s) ds+F(t), \tag{4}
 $$
 
 where `F(t)` is the *random force*, a function of the oscillators' initial conditions
@@ -72,7 +72,7 @@ only. When those initial conditions are drawn from the canonical (thermal) ensem
 turns it into an equation for the normalized VACF `C(t) = ⟨v(t)v(0)⟩/⟨v²⟩`:
 
 $$
-\dot C(t)=-\int_0^t\Gamma(t-s)\,C(s)\,ds,\qquad \Gamma(t)=\frac{K_N(t)+M\Omega^2}{M}. \tag{5}
+\dot C(t)=-\int_0^t\Gamma(t-s) C(s) ds,\qquad \Gamma(t)=\frac{K_N(t)+M\Omega^2}{M}. \tag{5}
 $$
 
 `Γ` is the memory kernel (the bath kernel per unit mass, plus the trap). Equation (5) 
@@ -94,7 +94,7 @@ also has one zero-frequency mode, the rigid translation of everything together.
 **The exact correlation function.** In normal modes the VACF is a finite cosine series:
 
 $$
-C(t)=\sum_k a_k^2\cos\nu_k t,\qquad \dot C(t)=-\sum_k a_k^2\,\nu_k\sin\nu_k t. \tag{7}
+C(t)=\sum_k a_k^2\cos\nu_k t,\qquad \dot C(t)=-\sum_k a_k^2 \nu_k\sin\nu_k t. \tag{7}
 $$
 
 **Exact trajectories.** Thermal initial conditions are independent Gaussians in the
@@ -102,7 +102,7 @@ normal modes, so a trajectory of the particle is
 
 $$
 v(t)=\sum_k\big[\alpha_k\cos\nu_k t+\beta_k\sin\nu_k t\big],\qquad
-\alpha_k,\beta_k\sim\mathcal N\!\left(0,\;\frac{a_k^2\,k_BT}{M}\right), \tag{8}
+\alpha_k,\beta_k\sim\mathcal N\left(0,\ \frac{a_k^2 k_BT}{M}\right), \tag{8}
 $$
 
 with the acceleration `dv/dt` and the position `q(t) = q(0) + ∫v` obtained term by term
@@ -113,7 +113,7 @@ coordinates. No time step is involved: any output grid, no integration error.
 trajectories,
 
 $$
-\hat C(t)=\frac{\sum_{n}v_n(t)\,v_n(0)}{\sum_{n}v_n(0)^2},\qquad
+\hat C(t)=\frac{\sum_{n}v_n(t) v_n(0)}{\sum_{n}v_n(0)^2},\qquad
 \mathrm{Var}\big[\hat C(t)\big]=\frac{1-C(t)^2}{n},\qquad
 \mathrm{Cov}\big[\hat C(t),\hat C(t')\big]=\frac{C(t-t')-C(t)C(t')}{n}, \tag{9}
 $$
@@ -126,8 +126,8 @@ along every trajectory (as the forces are in MD).
 **The two preset baths.**
 
 $$
-\text{Ohmic: }J(\omega)=\eta\,\omega\,e^{-\omega/\omega_c},\quad K_\infty(t)=\frac{2\eta\omega_c/\pi}{1+\omega_c^2t^2};\qquad
-\text{Debye: }J(\omega)=\frac{2\lambda\omega_c\,\omega}{\omega_c^2+\omega^2},\quad K_\infty(t)=2\lambda\,e^{-\omega_c t}. \tag{10}
+\text{Ohmic: }J(\omega)=\eta \omega e^{-\omega/\omega_c},\quad K_\infty(t)=\frac{2\eta\omega_c/\pi}{1+\omega_c^2t^2};\qquad
+\text{Debye: }J(\omega)=\frac{2\lambda\omega_c \omega}{\omega_c^2+\omega^2},\quad K_\infty(t)=2\lambda e^{-\omega_c t}. \tag{10}
 $$
 
 For a free particle in the Ohmic bath the shape of `C(t)` depends on one number only,
