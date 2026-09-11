@@ -4,7 +4,7 @@
 [![PyPI](https://img.shields.io/pypi/v/kac-zwanzig)](https://pypi.org/project/kac-zwanzig/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-An exactly solvable Kac–Zwanzig bath, with analytical expressions for the memory 
+An exactly solvable Kac–Zwanzig model, with analytical expressions for the memory 
 kernel, correlation function, and for individual dynamical trajectories sampled 
 from the canonical distribution.  
 
