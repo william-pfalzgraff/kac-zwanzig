@@ -45,7 +45,7 @@ $$
 kernel.  For a bath of $N$ harmonic oscillators the kernel $K_N$ is:
 
 $$
-K_N(t)=\sum_{j=1}^{N}k_j\cos\omega_j t. \qquad (2)
+K_N(t)=\sum_{j=1}^{N}k_j\cos (\omega_j t). \qquad (2)
 $$
 
 This is exact for the finite bath. A continuous bath is described by a spectral density
