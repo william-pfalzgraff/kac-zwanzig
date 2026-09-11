@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
-title: "kac-zwanzig: an exactly solvable Kac-Zwanzig bath"
+title: "kac-zwanzig: an exactly solvable Kac-Zwanzig model"
 type: software
 authors:
   - family-names: Pfalzgraff
@@ -15,8 +15,7 @@ url: https://github.com/william-pfalzgraff/kac-zwanzig
 abstract: >-
   A Python package that generates exact memory kernels, velocity autocorrelation
   functions and trajectories for a particle linearly coupled to a bath of harmonic
-  oscillators, plus sampled correlation functions with controllable statistical noise,
-  for testing methods that extract memory kernels from simulation data.
+  oscillators, plus sampled correlation functions with controllable statistical noise.
 keywords:
   - generalized Langevin equation
   - memory kernel
