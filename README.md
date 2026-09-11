@@ -10,7 +10,7 @@ sampled correlation functions with controllable statistical noise.
 
 The Kac–Zwanzig model is a single particle linearly coupled to a collection of harmonic
 oscillators; these oscillators are often called the "bath". It is a simple  model of a 
-solute in a solvent - the forces imparted on the particle by the oscillators represent 
+solute in a solvent: the forces imparted on the particle by the oscillators represent 
 the forces that would be experienced by a solute. The velocity autocorrelation 
 function (VACF) is qualitatively similar to those produced by moleculr dynamics (MD)
 simulations of solutes in liquids.  
@@ -33,9 +33,9 @@ It depends only on numpy and contains no solver.
 
 ## Theory
 
-**The Hamiltonian.** A particle of mass $M$, coordinate `q`, momentum `p`, optionally in a
-harmonic trap of frequency `Ω` (zero by default), coupled to `N` oscillators with
-coordinates `x_j`, frequencies `ω_j` and coupling weights `k_j ≥ 0`:
+**The Hamiltonian.** A particle of mass $M$, coordinate $q$, momentum $p$, optionally in a
+harmonic trap of frequency $Ω$ (zero by default), coupled to $N$ oscillators with
+coordinates $x_j$, frequencies $\omega_j$ and coupling weights $k_j \geq 0$:
 
 $$
 H=\frac{p^2}{2M}+\frac{1}{2}M\Omega^2q^2+\sum_{j=1}^{N}\left[\frac{p_j^2}{2}+\frac{\omega_j^2}{2}\Big(x_j-\frac{\sqrt{k_j}}{\omega_j} q\Big)^2\right]. \qquad (1)
@@ -49,7 +49,7 @@ K_N(t)=\sum_{j=1}^{N}k_j\cos\omega_j t. \qquad (2)
 $$
 
 This is exact for the finite bath. A continuous bath is described by a spectral density
-`J(ω)`; the two are related by
+$J(ω)$; the two are related by
 
 $$
 J(\omega)=\frac{\pi}{2}\sum_j k_j \omega_j \delta(\omega-\omega_j),\qquad
@@ -59,37 +59,37 @@ $$
 so choosing `(ω_j, k_j)` is choosing a quadrature rule for the cosine transform in (3).
 
 **The generalized Langevin equation.** Integrating out the oscillators exactly gives, for
-the particle's velocity `v = p/M`,
+the particle's velocity $v = \frac{p}{M}$,
 
 $$
 M \dot v(t)=-M\Omega^2 q(t)-\int_0^t K_N(t-s) v(s)\ ds+F(t), \qquad (4)
 $$
 
-where `F(t)` is the *random force*, a function of the oscillators' initial conditions
+where $F(t)$ is the *random force*, a function of the oscillators' initial conditions
 only. When those initial conditions are drawn from the canonical (thermal) ensemble,
-`⟨F(t) F(0)⟩ = k_BT K_N(t)` (the fluctuation–dissipation theorem) and `⟨F(t) v(0)⟩ = 0`.
+$⟨F(t) F(0)⟩ = k_BT K_N(t)$ (the fluctuation–dissipation theorem) and $⟨F(t) v(0)⟩ = 0$.
 
-**The memory kernel of the correlation function.** Multiplying (4) by `v(0)` and averaging
-turns it into an equation for the normalized VACF `C(t) = ⟨v(t)v(0)⟩/⟨v²⟩`:
+**The memory kernel of the correlation function.** Multiplying (4) by $v(0)$ and averaging
+turns it into an equation for the normalized VACF $C(t) = ⟨v(t)v(0)⟩/⟨v²⟩$:
 
 $$
 \dot C(t)=-\int_0^t\Gamma(t-s) C(s)\ ds,\qquad \Gamma(t)=\frac{K_N(t)+M\Omega^2}{M}. \qquad (5)
 $$
 
-`Γ` is the memory kernel (the bath kernel per unit mass, plus the trap). Equation (5) 
-holds identically for every finite bath, so `Γ` is the exact reference no matter how 
+$\Gamma$ is the memory kernel (the bath kernel per unit mass, plus the trap). Equation (5) 
+holds identically for every finite bath, so $\Gamma$ is the exact reference no matter how 
 the bath was discretized.
 
-**Normal modes.** The coupled system is a set of `N+1` independent oscillators. Their
-frequencies `ν_k` are the square roots of the eigenvalues of the Hessian, an `(N+1)×(N+1)` 
-arrowhead matrix, and each mode carries a share `a_k²` of the particle (`Σ_k a_k² = 1`). 
+**Normal modes.** The coupled system is a set of $N+1$ independent oscillators. Their
+frequencies $\nu_k$ are the square roots of the eigenvalues of the Hessian, an $(N+1)×(N+1)$ 
+arrowhead matrix, and each mode carries a share $a_k²$ of the particle (`Σ_k a_k² = 1`). 
 The nonzero frequencies solve
 
 $$
 \sum_{j=1}^{N}\frac{k_j}{\nu^2-\omega_j^2}=M, \qquad (6)
 $$
 
-one root between each pair of neighbouring `ω_j²` and one above the last. A free particle
+one root between each pair of neighbouring $\omega_j^2$ and one above the last. A free particle
 also has one zero-frequency mode, the rigid translation of everything together.
 
 **The exact correlation function.** In the normal mode representation the VACF is a finite 
@@ -107,11 +107,11 @@ v(t)=\sum_k\big[\alpha_k\cos\nu_k t+\beta_k\sin\nu_k t\big],\qquad
 \alpha_k,\beta_k\sim\mathcal N\left(0,\ \frac{a_k^2 k_BT}{M}\right), \qquad (8)
 $$
 
-with the acceleration `dv/dt` and the position `q(t) = q(0) + ∫v` obtained term by term
-and the random force `F(t)` of (4) reconstructed from the oscillators' initial
+with the acceleration $dv/dt$ and the position $q(t) = q(0) + ∫v$ obtained term by term
+and the random force $F(t)$ of (4) reconstructed from the oscillators' initial
 coordinates. 
 
-**Sampled correlation functions.** A "simulation" is an average over `n` independent
+**Sampled correlation functions.** A "simulation" is an average over $n$ independent
 trajectories,
 
 $$
@@ -120,9 +120,9 @@ $$
 \mathrm{Cov}\big[\hat C(t),\hat C(t')\big]=\frac{C(t-t')-C(t)C(t')}{n}, \qquad (9)
 $$
 
-because `v(t)` is a Gaussian process. The noise is correlated in time on the scale of
-`C` itself, which matters when `Ĉ` is differentiated or inverted. The derivative can also
-be estimated without differencing, from `⟨v̇(t) v(0)⟩`, since the acceleration is known
+because $v(t)$ is a Gaussian process. The noise is correlated in time on the scale of
+$C$ itself, which matters when $C$ is differentiated or inverted. The derivative can also
+be estimated without differencing, from $⟨\dot{v}(t) v(0)⟩$, since the acceleration is known
 along every trajectory (as the forces are in MD).
 
 **The two preset baths.**
@@ -132,8 +132,8 @@ $$
 \text{Debye: }J(\omega)=\frac{2\lambda\omega_c \omega}{\omega_c^2+\omega^2},\quad K_\infty(t)=2\lambda e^{-\omega_c t}. \qquad (10)
 $$
 
-For a free particle in the Ohmic bath the shape of `C(t)` depends on one number only,
-`η/(Mω_c)`; `ω_c` sets the unit of time. With `M = ω_c = 1`, `η = 1` gives the single shallow
+For a free particle in the Ohmic bath the shape of $C(t)$ depends on one number only,
+$η/(Mω_c)$; $ω_c$ sets the unit of time. With $M = ω_c = 1$, $η = 1$ gives the single shallow
 negative dip typical of liquids.
 
 The derivations are in [docs/theory.md](docs/theory.md); the choice of frequency grid is
@@ -183,11 +183,11 @@ same as an executed notebook.
 ## Worked examples
 
 **Which discretization?** Two grids are built in. `grid="uniform"` places oscillators at
-equally spaced frequencies up to a cutoff and weights them by `J(ω)/ω`; it is a midpoint
+equally spaced frequencies up to a cutoff and weights them by $J(ω)/ω$; it is a midpoint
 rule for the integral in (3), its error is a smooth, tiny copy of the kernel shifted to
-`t = 2π/Δω`, and it is the default for the Ohmic bath. `grid="invcdf"` places the
-oscillators at quantiles of `J(ω)/ω` with equal weights; it never truncates and gets
-`K(0)` exactly but leaves a small high-frequency ripple in `K_N`. Either way `K_N` and `Γ`
+$t = 2\pi/\Delta \omega$, and it is the default for the Ohmic bath. `grid="invcdf"` places the
+oscillators at quantiles of $J(ω)/ω$ with equal weights; it never truncates and gets
+$K(0)$ exactly but leaves a small high-frequency ripple in $K_N$. Either way $K_N$ and $\Gamma$
 are the exact answers for the bath you built; the grid only decides how closely the
 finite bath imitates the continuum. [examples/frequency_grids.py](examples/frequency_grids.py)
 makes the comparison figures; the PDF in `docs/` has the analysis.
@@ -211,7 +211,7 @@ independent groups (50 by default), keeps a complete estimate per group, and rep
 pooled estimate. The group spread gives a standard error at each time; resampling groups
 with replacement gives bootstrap replicates that keep the time correlation of (9) and
 handle the ratio normalization exactly. Use the replicates to put error bars on anything
-computed from `Ĉ`, such as a recovered kernel.
+computed from $C$.  
 [examples/sampling_noise.py](examples/sampling_noise.py) studies the noise, the derivative
 estimators and why averaging one long trajectory over time does not work for this model.
 
@@ -277,25 +277,24 @@ Everything below is available as `kz.<name>` after `import kac_zwanzig as kz`.
 
 ## Conventions and things to know
 
-- **Normalization.** `C(0) = 1`. Sampled estimates divide by the sampled `⟨v(0)²⟩` by default
-  (`normalization="sample"`, eq. (9)); `"exact"` divides by `k_BT/M` instead and has noise
-  `(1 + C²)/n`. The memory kernel does not depend on either choice.
-- **Sign of the kernel.** The package reports `Γ` as defined in (5), positive at `t = 0`. A
-  solver that writes (5) with a plus sign wants `−Γ` and `−Γ(0)` as its initial value.
+- **Normalization.** $C(0) = 1$. Sampled estimates divide by the sampled $⟨v(0)^2⟩$ by default
+  (`normalization="sample"`, eq. (9)); `"exact"` divides by $k_BT/M$ instead and has noise
+  $(1 + C^2)/n$. The memory kernel does not depend on either choice.
+- **Sign of the kernel.** The package reports $Γ$ as defined in (5), positive at $t = 0$.
 - **Groups, not time blocks.** The "blocks" in `sampled_vacf` are groups of independent
   trajectories, used for standard errors and the bootstrap. They are not the block
   averaging of MD time series; trajectories here are independent by construction.
 - **Ensemble, not time, averages.** The finite bath is integrable: averaging one long
-  trajectory over time origins stalls at an error floor set by `1/Σ_k a_k⁴` effective modes
-  and never converges to the thermal `C(t)`. `sampled_vacf` averages over independent
+  trajectory over time origins stalls at an error floor set by $1/\Sigma_k a_k^4$ effective modes
+  and never converges to the thermal $C(t)$. `sampled_vacf` averages over independent
   initial conditions, which does converge (`kz.vacf_time_average` exists to demonstrate the trap).
 - **Derivatives.** `est.Cdot_acc` uses the acceleration along each trajectory, so it has no
   differencing error; `kz.finite_difference` is the alternative. Because the noise in (9) is
   smooth in time, differencing amplifies it far less than white noise would.
-- **Cost.** The eigensolve takes about a second at `N = 2000` and scales as `N³`. `sampled_vacf`
-  never forms the trajectory array (`O(N (n_traj + len(t)))`; `10⁶` trajectories in about 30 s).
-  `trajectory` does form it, `n_traj × len(t)` doubles, and the random force additionally needs
-  the `(N+1)²` eigenvector matrix (32 MB at `N = 2000`).
+- **Cost.** The eigensolve takes about a second at $N = 2000$ and scales as $N^3$. `sampled_vacf`
+  never forms the trajectory array ($O(N (n_traj + len(t)))$; $10^6$ trajectories in about 30 s).
+  `trajectory` does form it, $n_traj \times len(t)$ doubles, and the random force additionally needs
+  the $(N+1)^2$ eigenvector matrix (32 MB at `N = 2000`).
 - **What it is not.** No anharmonic potentials (the particle is free or harmonically trapped),
   no thermostat or integrator (nothing to integrate), no quantum effects, no time-averaged
   observables (see above), and no solver.
