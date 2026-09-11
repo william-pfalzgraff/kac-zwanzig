@@ -4,36 +4,36 @@
 [![PyPI](https://img.shields.io/pypi/v/kac-zwanzig)](https://pypi.org/project/kac-zwanzig/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-An exactly solvable Kac–Zwanzig model, with analytical expressions for the memory 
-kernel, correlation function, and for individual dynamical trajectories sampled 
-from the canonical distribution.  
+A Python package that generates exact memory kernels, velocity autocorrelation functions 
+and trajectories for a particle linearly coupled to a bath of harmonic oscillators, plus 
+sampled correlation functions with controllable statistical noise.  
 
-The Kac–Zwanzig model is a single particle attached by springs to a collection of
-harmonic oscillators; these oscillators are often called the "bath". It is a simple 
-model of a solute in a solvent - the forces imparted on the particle by the oscillators
-represent the forces that would be experiencd by a solute. The velocity autocorrelation 
+The Kac–Zwanzig model is a single particle linearly coupled to a collection of harmonic
+oscillators; these oscillators are often called the "bath". It is a simple  model of a 
+solute in a solvent - the forces imparted on the particle by the oscillators represent 
+the forces that would be experienced by a solute. The velocity autocorrelation 
 function (VACF) is qualitatively similar to those produced by moleculr dynamics (MD)
 simulations of solutes in liquids.  
 
 Because every force in the model is linear, it can be solved exactly. The particle's 
 correlation functions, the memory kernel of its generalized Langevin equation (GLE), 
-and even individual trajectories are all available in closed form, up to one matrix 
+and individual trajectories are all available in closed form, up to one matrix 
 diagonalization. 
 
 `kac_zwanzig` generates:
 
 - the spectral density of the bath and its discretization into oscillators,
 - the exact memory kernel of the finite bath and its continuum limit,
-- the exact VACF `C(t)` and its time derivative,
+- the exact VACF $C(t)$ and its time derivative,
 - exact trajectories of the particle: velocity, acceleration, position and the GLE's random force,
-- sampled VACFs from `n` independent trajectories, with the noise a simulation would have,
+- sampled VACFs from $n$ independent trajectories, with the noise a simulation would have,
   including standard errors and bootstrapped confidence intervals.
   
 It depends only on numpy and contains no solver.
 
 ## Theory
 
-**The Hamiltonian.** A particle of mass `M`, coordinate `q`, momentum `p`, optionally in a
+**The Hamiltonian.** A particle of mass $M$, coordinate `q`, momentum `p`, optionally in a
 harmonic trap of frequency `Ω` (zero by default), coupled to `N` oscillators with
 coordinates `x_j`, frequencies `ω_j` and coupling weights `k_j ≥ 0`:
 
