@@ -4,30 +4,31 @@
 [![PyPI](https://img.shields.io/pypi/v/kac-zwanzig)](https://pypi.org/project/kac-zwanzig/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-An exactly solvable Kac–Zwanzig bath: memory kernels, correlation functions and
-trajectories in closed form, plus sampled correlation functions with the statistical
-noise of a real simulation. 
+An exactly solvable Kac–Zwanzig bath, with analytical expressions for the memory 
+kernel, correlation function, and for individual dynamical trajectories sampled 
+from the canonical distribution.  
 
 The Kac–Zwanzig model is a single particle attached by springs to a collection of
-harmonic oscillators, the "bath". It is a simple model of a solute jostled by a 
-liquid: the oscillators take energy from the particle and hand it back later, and 
-that delayed response is the memory effect that shapes the particle's velocity 
-autocorrelation function (VACF) in molecular dynamics (MD) simulations of liquids. 
+harmonic oscillators; these oscillators are often called the "bath". It is a simple 
+model of a solute in a solvent - the forces imparted on the particle by the oscillators
+represent the forces that would be experiencd by a solute. The velocity autocorrelation 
+function (VACF) is qualitatively similar to those produced by moleculr dynamics (MD)
+simulations of solutes in liquids.  
+
 Because every force in the model is linear, it can be solved exactly. The particle's 
 correlation functions, the memory kernel of its generalized Langevin equation (GLE), 
 and even individual trajectories are all available in closed form, up to one matrix 
 diagonalization. 
 
-`kac_zwanzig` generates, for a bath you choose:
+`kac_zwanzig` generates:
 
-- the spectral density and its discretization into oscillators,
+- the spectral density of the bath and its discretization into oscillators,
 - the exact memory kernel of the finite bath and its continuum limit,
 - the exact VACF `C(t)` and its time derivative,
 - exact trajectories of the particle: velocity, acceleration, position and the GLE's random force,
 - sampled VACFs from `n` independent trajectories, with the noise a simulation would have,
-  standard errors and a bootstrap,
-- a bundle of `C`, `dC/dt` and the exact kernel to feed to any kernel-extraction method.
-
+  including standard errors and bootstrapped confidence intervals.
+  
 It depends only on numpy and contains no solver.
 
 ## Theory
@@ -40,14 +41,14 @@ $$
 H=\frac{p^2}{2M}+\frac{1}{2}M\Omega^2q^2+\sum_{j=1}^{N}\left[\frac{p_j^2}{2}+\frac{\omega_j^2}{2}\Big(x_j-\frac{\sqrt{k_j}}{\omega_j} q\Big)^2\right]. \qquad (1)
 $$
 
-**The bath kernel and the spectral density.** The bath acts on the particle through one
-function only,
+**The bath kernel and the spectral density.** The bath acts on the particle through the memory
+kernel.  For a bath of $N$ harmonic oscillators the kernel $K_N$ is:
 
 $$
-K_N(t)=\sum_{j=1}^{N}k_j\cos\omega_j t, \qquad (2)
+K_N(t)=\sum_{j=1}^{N}k_j\cos\omega_j t. \qquad (2)
 $$
 
-which is exact for the finite bath. A continuous bath is described by a spectral density
+This is exact for the finite bath. A continuous bath is described by a spectral density
 `J(ω)`; the two are related by
 
 $$
@@ -80,9 +81,9 @@ holds identically for every finite bath, so `Γ` is the exact reference no matte
 the bath was discretized.
 
 **Normal modes.** The coupled system is a set of `N+1` independent oscillators. Their
-frequencies `ν_k` are the square roots of the eigenvalues of an `(N+1)×(N+1)` arrowhead
-matrix, and each mode carries a share `a_k²` of the particle (`Σ_k a_k² = 1`). The
-nonzero frequencies solve
+frequencies `ν_k` are the square roots of the eigenvalues of the Hessian, an `(N+1)×(N+1)` 
+arrowhead matrix, and each mode carries a share `a_k²` of the particle (`Σ_k a_k² = 1`). 
+The nonzero frequencies solve
 
 $$
 \sum_{j=1}^{N}\frac{k_j}{\nu^2-\omega_j^2}=M, \qquad (6)
@@ -91,7 +92,8 @@ $$
 one root between each pair of neighbouring `ω_j²` and one above the last. A free particle
 also has one zero-frequency mode, the rigid translation of everything together.
 
-**The exact correlation function.** In normal modes the VACF is a finite cosine series:
+**The exact correlation function.** In the normal mode representation the VACF is a finite 
+cosine series:
 
 $$
 C(t)=\sum_k a_k^2\cos\nu_k t,\qquad \dot C(t)=-\sum_k a_k^2 \nu_k\sin\nu_k t. \qquad (7)
@@ -107,7 +109,7 @@ $$
 
 with the acceleration `dv/dt` and the position `q(t) = q(0) + ∫v` obtained term by term
 and the random force `F(t)` of (4) reconstructed from the oscillators' initial
-coordinates. No time step is involved: any output grid, no integration error.
+coordinates. 
 
 **Sampled correlation functions.** A "simulation" is an average over `n` independent
 trajectories,
