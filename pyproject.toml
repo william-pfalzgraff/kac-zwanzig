@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "kac-zwanzig"
 dynamic = ["version"]
-description = "An exactly solvable Kac-Zwanzig bath: spectral densities, memory kernels, correlation functions and sampled trajectories for testing memory-kernel extraction"
+description = "A Python package that generates exact memory kernels, velocity autocorrelation functions and trajectories for a particle linearly coupled to a bath of harmonic oscillators, plus sampled correlation functions with controllable statistical noise."
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"

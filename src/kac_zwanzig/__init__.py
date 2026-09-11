@@ -60,7 +60,7 @@ from .propagate import Trajectory, acceleration, gle_residual, initial_position,
 from .sample import ModeState, default_chunk, iter_sample_modes, sample_modes, sample_state
 from .system import InversionData, System
 
-__version__ = "0.4.0"
+__version__ = "0.4.1"
 
 sampled_vacf = vacf_ensemble
 """Alias: ``kac_zwanzig.sampled_vacf(system, t, n_traj, rng)`` is :func:`vacf_ensemble`."""

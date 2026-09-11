@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.1 — 2026-09-11
+
+Metadata only: the PyPI summary now matches the repository description. No code changes.
+
 ## 0.4.0 — 2026-09-10
 
 First public release. Renamed from the internal package `kz` to `kac_zwanzig`
